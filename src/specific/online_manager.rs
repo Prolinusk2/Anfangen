@@ -1,7 +1,7 @@
 use std::fs;
 
 fn get_api_key() -> String {
-    fs::read_to_string("src/API_KEY").unwrap_or("1".to_string())
+    fs::read_to_string("API_KEY").unwrap_or("1".to_string())
 }
 
 pub async fn get_recent_games(uuid: &str) -> Result<String, reqwest::Error> {
