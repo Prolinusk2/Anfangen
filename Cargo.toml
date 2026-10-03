@@ -4,6 +4,12 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+base64 = "0.23.1"
+fastnbt = "2.6.3"
+flate2 = "1.1.10"
 reqwest = { version = "0.12", features = ["json"] }
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1", features = ["full"] }
+uuid = "1.26.1"
