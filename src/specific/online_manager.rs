@@ -1,4 +1,5 @@
 use std::error::Error;
+use std::fmt::format;
 use std::fs;
 
 fn get_api_key() -> Result<String, Box<dyn Error + Send + Sync>> {
@@ -57,6 +58,21 @@ pub async fn get_profiles(uuid: &str) -> Result<serde_json::Value, Box<dyn Error
 
     let url = format!("https://api.hypixel.net/v2/skyblock/profiles?uuid={uuid}&key={api_key}");
     let antwort: serde_json::Value = client.get(url).send().await?.json().await?;
+
+    Ok(antwort)
+}
+
+pub async fn get_profile(_player_uuid: &str, aktive_profile_id: &str) -> Result<serde_json::Value, Box<dyn Error + Send + Sync>> {
+    let client = reqwest::Client::new();
+
+    let antwort: serde_json::Value = client
+        .get("https://api.hypixel.net/v2/skyblock/profile")
+        .query(&[("profile", aktive_profile_id)])
+        .header("API-Key", get_api_key()?)
+        .send()
+        .await?
+        .json()
+        .await?;
 
     Ok(antwort)
 }
